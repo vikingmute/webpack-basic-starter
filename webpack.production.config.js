@@ -1,12 +1,12 @@
 
 var path = require('path');
-var webpack = require('webpack');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
-var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 var TEM_PATH = path.resolve(ROOT_PATH, 'templates');
+var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 
 module.exports = {
   entry: {
@@ -18,23 +18,7 @@ module.exports = {
     path: BUILD_PATH,
     filename: '[name].js'
   },
-  //enable dev source map
-  devtool: 'eval-source-map',
-  //enable dev server
-  devServer: {
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    progress: true,
-  },
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        include: APP_PATH,
-        loader: "jshint-loader"
-      }
-    ],
     loaders: [
       {
         test: /\.jsx?$/,
@@ -55,24 +39,21 @@ module.exports = {
       }
     ]
   },
-
-  //custom jshint options
-  // any jshint option http://www.jshint.com/docs/options/
-  jshint: {
-    "esnext": true
-  },
-
   plugins: [
+    //enable uglify
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    //split vendors script
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    //generate two pages
     new HtmlwebpackPlugin({
       title: 'Hello World app',
       template: path.resolve(TEM_PATH, 'index.html')
     }),
-    /*new HtmlwebpackPlugin({
+    new HtmlwebpackPlugin({
       title: 'Hello Mobile app',
       template: path.resolve(TEM_PATH, 'mobile.html'),
       filename: 'mobile.html'
-    }),*/
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
+    })
     //provide $, jQuery and window.jQuery to every script
     /*new webpack.ProvidePlugin({
       $: "jquery",
