@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: BUILD_PATH,
-    filename: '[name].js'
+    filename: '[name].[hash].js'
   },
   module: {
     loaders: [
@@ -47,12 +47,17 @@ module.exports = {
     //generate two pages
     new HtmlwebpackPlugin({
       title: 'Hello World app',
-      template: path.resolve(TEM_PATH, 'index.html')
+      template: path.resolve(TEM_PATH, 'index.html'),
+      filename: 'index.html',
+      chunks: ['app', 'vendors'],
+      inject: 'body'
     }),
     new HtmlwebpackPlugin({
       title: 'Hello Mobile app',
       template: path.resolve(TEM_PATH, 'mobile.html'),
-      filename: 'mobile.html'
+      filename: 'mobile.html',
+      chunks: ['mobile', 'vendors'],
+      inject: 'body'
     })
     //provide $, jQuery and window.jQuery to every script
     /*new webpack.ProvidePlugin({
