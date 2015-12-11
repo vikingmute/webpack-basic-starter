@@ -7,16 +7,22 @@ var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 var TEM_PATH = path.resolve(ROOT_PATH, 'templates');
+var BOWER_PATH = path.resolve(ROOT_PATH, 'bower_components');
 
 module.exports = {
   entry: {
     app: path.resolve(APP_PATH, 'index.js'),
     mobile: path.resolve(APP_PATH, 'mobile.js'),
-    vendors: ['jquery', 'moment']
+    vendors: ['jquery', 'moment', 'lodash']
   },
   output: {
     path: BUILD_PATH,
     filename: '[name].js'
+  },
+  resolve: {
+    alias: {
+      lodash: path.resolve(BOWER_PATH, 'lodash/lodash.js')
+    }
   },
   //enable dev source map
   devtool: 'eval-source-map',
@@ -65,7 +71,10 @@ module.exports = {
   plugins: [
     new HtmlwebpackPlugin({
       title: 'Hello World app',
-      template: path.resolve(TEM_PATH, 'index.html')
+      template: path.resolve(TEM_PATH, 'index.html'),
+      filename: 'index.html',
+      chunks: ['app', 'vendors'],
+      inject: 'body'
     }),
     /*new HtmlwebpackPlugin({
       title: 'Hello Mobile app',

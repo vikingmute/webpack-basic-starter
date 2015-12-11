@@ -1,0 +1,21 @@
+{
+  "name": "webpack",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "vikingmute@gmail.com"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/vikingmute/webpack-basic-starter",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~3.10.1"
+  }
+}

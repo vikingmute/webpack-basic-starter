@@ -7,16 +7,22 @@ var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var TEM_PATH = path.resolve(ROOT_PATH, 'templates');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+var BOWER_PATH = path.resolve(ROOT_PATH, 'bower_components');
 
 module.exports = {
   entry: {
     app: path.resolve(APP_PATH, 'index.js'),
     mobile: path.resolve(APP_PATH, 'mobile.js'),
-    vendors: ['jquery', 'moment']
+    vendors: ['jquery', 'moment', 'lodash']
   },
   output: {
     path: BUILD_PATH,
     filename: '[name].[hash].js'
+  },
+  resolve: {
+    alias: {
+      lodash: path.resolve(BOWER_PATH, 'lodash/lodash.js')
+    }
   },
   module: {
     loaders: [

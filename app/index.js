@@ -1,6 +1,7 @@
 import './main.scss';
 import generateText from './sub';
 import moment from 'moment';
+import _ from 'lodash';
 /*
  * 引入jquery plugin 有两种方法
  * 第一种把jQuery直接作成一个全局变量 这样在每个脚本中都可以直接使用
@@ -27,7 +28,10 @@ div.appendChild(generateText());
 
 const myPromise = Promise.resolve(42);
 myPromise.then((number) => {
-  $('body').append('<p>promise result is ' + number + ' now is ' + moment().format() + '</p>');
+  const testArrStr = _.map([1, 2, 3], function(n) { return n * 3; }).toString();
+  const currentTime = moment().format();
+  //testing template strings
+  $('body').append(`<p> promise result is ${number}, now is ${currentTime}, lodash result is ${testArrStr}`);
   //call our jquery plugin!
   $('p').greenify();
 });
