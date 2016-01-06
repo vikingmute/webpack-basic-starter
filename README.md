@@ -6,8 +6,9 @@ this demo shows how webpack works with sass, es6, third-party library(jQuery, mo
 
 How is it work?
 **install the deps**
+we are testing library using npm(jquery, moment) and bower (lodash).
 ```bash
-npm install
+npm install && bower install
 ```
 
 **run the dev server**
