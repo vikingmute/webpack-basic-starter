@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "private": true
+  },
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
     "test": "webpack-dev-server --config webpack.test.config.js",
